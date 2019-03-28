@@ -1,8 +1,3 @@
-# usage :
-#   
-# python scrapeImages.py --search "rose flower" --num_images 10 --directory "<path/to/your/destination/folder>" 
-#
-#......................................................
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -38,7 +33,7 @@ def main(args):
 	    ActualImages.append((link,Type))
 	count =0
 	for i , (img , Type) in enumerate( ActualImages):
-	    if count == 50 :
+	    if count == max_images :
 		break
 	    try:
 	        req = urllib2.Request(img, headers={'User-Agent' : header})
@@ -50,10 +45,11 @@ def main(args):
                 	    #f.close() 
 	        	else :
 	        	    f = open(os.path.join(save_directory , "img" + "_"+ str(i)+"."+Type), 'wb')
-			    print str(len(Type)) + Type
+			    #print str(len(Type)) + Type
 			    #f.close()
 		        f.write(raw_img)
 		        f.close()
+			print count
 			count = count +1
 	    except Exception as e:
 	        print "could not load : "+img
