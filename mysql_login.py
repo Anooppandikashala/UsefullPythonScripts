@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 
+
 def login(conn, user_name, password):
     cursor = conn.cursor()
     query = ("SELECT id FROM users "
@@ -37,3 +38,5 @@ if __name__ == '__main__':
             print(err)
     else:
         conn.close()
+        
+        
